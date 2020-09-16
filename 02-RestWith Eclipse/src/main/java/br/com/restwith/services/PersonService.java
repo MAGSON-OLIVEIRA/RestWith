@@ -10,13 +10,13 @@ import br.com.restwith.data.model.Person;
 import br.com.restwith.data.vo.PersonVO;
 import br.com.restwith.exception.ResourceNotFoundException;
 import br.com.restwith.exception.ResourceNotFoundException2;
-import br.com.restwith.repository.PersonRespository;
+import br.com.restwith.repository.PersonRepository;
 
 @Service   // spring cuide da injeção de dependecia dessa classe usando o autorad
 public class PersonService {
 	
 	@Autowired
-	private PersonRespository repsitory;
+	private PersonRepository repsitory;
 	
 	public PersonVO create(PersonVO person) {
 		var entity = Converter.parse(person, Person.class);
@@ -25,7 +25,7 @@ public class PersonService {
 	}
 	
 	public PersonVO update(PersonVO person) {
-		var entity = repsitory.findById(person.getId())
+		var entity = repsitory.findById(person.getKey())
 				.orElseThrow(() -> new ResourceNotFoundException("No found id"));
 		var vo = Converter.parse(repsitory.saveAndFlush(entity), PersonVO.class);
 		return 	vo;	

@@ -1,1 +1,4 @@
  mvn flyway:migrate
+ 
+ magson - admin123
+ admin - admin234

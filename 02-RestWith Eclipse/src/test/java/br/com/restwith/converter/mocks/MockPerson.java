@@ -47,7 +47,7 @@ public class MockPerson {
 		person.setAddress("Address " + number);
 		person.setFirstName("Fisrt name " + number);
 		person.setGender(((number % 2)==0)?"Male":"Female");
-		person.setId(number.longValue());
+		person.setKey(number.longValue());
 		person.setLastName("Lest name "+number);
 		return person;
 	}
