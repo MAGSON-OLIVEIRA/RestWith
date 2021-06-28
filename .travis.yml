@@ -1,7 +1,18 @@
-language: java
-jdk:
-  - oraclejdk8
+language: bash
+services: docker
 before_install:
-  - chmod +x mvnw
-dist: trusty
-
+  - cd /
+  - echo "We are in the Docker folder!"
+script:
+  - docker-compose build
+before_deploy:
+  - echo "${DOCKER_PASSWORD}" | docker login --username "${DOCKER_USERNAME}" --password-stdin
+deploy:
+  provider: script
+  script:
+    docker push magsond/mysql-rest-with;
+    docker push magsond/rest-with-spring-boot;
+  on:
+    branch: master
+notifications:
+  email: false
