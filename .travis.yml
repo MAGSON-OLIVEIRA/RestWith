@@ -1,0 +1,18 @@
+language: bash
+services: docker
+before_install: 
+    - cd RestWith/
+    - echo "We are in the docker folder!"
+script:
+    - docker-compose build
+berfore_deploy:
+    - echo "${DOCKER_PASSWORD}" | docker login --username "${DOCKER_USERNAME}" --password-stdin
+deploy:
+    provider: script
+    script:
+        docker push magsond/mysql-rest-with;
+        docker push magsond/rest-with-spring-boot;
+    on:
+        branch: master
+notifications:
+    email: false
